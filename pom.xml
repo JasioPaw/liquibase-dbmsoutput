@@ -1,0 +1,101 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.liquibase.ext</groupId>
+    <artifactId>liquibase-dbmsoutput</artifactId>
+    <name>Liquibase Oracle DBMS_OUTPUT</name>
+    <version>0.1-SNAPSHOT</version>
+
+
+    <licenses>
+        <license>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <name>Apache License, Version 2.0</name>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>pjasion</id>
+            <name>Paweł Jasionowski</name>
+            <email>pawel.jasionowski@gmai.com</email>
+            <url>https://pjasion.pl</url>
+            <roles>
+                <role>creator</role>
+            </roles>
+            <timezone>+2</timezone>
+        </developer>
+    </developers>
+
+    <!-- TO PHYSICALLY RUN TESTS, UNCOMMENT THIS SECTION -->
+    <!--<repositories>-->
+    <!--<repository>-->
+    <!--<id>datanucleus</id>-->
+    <!--<url>http://www.datanucleus.org/downloads/maven2/</url>-->
+    <!--</repository>-->
+    <!--</repositories>-->
+
+    <properties>
+        <liquibase.version>3.4.2</liquibase.version>
+        <junit.version>4.11</junit.version>
+        <oracle.version>11.2.0.3</oracle.version>
+        <maven-compiler-plugin.version>3.6.2</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations-java5</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- TO PHYSICALLY RUN TESTS, UNCOMMENT THIS DEPENDENCY -->
+        <!-- AND MODIFY ./src/test/resources/tests.properties -->
+        <!--<dependency>-->
+        <!--<groupId>oracle</groupId>-->
+        <!--<artifactId>ojdbc6</artifactId>-->
+        <!--<version>${oracle.version}</version>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
+    </dependencies>
+
+    <build>
+        <testResources>
+            <testResource>
+                <directory>${project.basedir}/src/test/java</directory>
+            </testResource>
+            <testResource>
+                <directory>${project.basedir}/src/test/resources</directory>
+            </testResource>
+        </testResources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>6</source>
+                    <target>6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

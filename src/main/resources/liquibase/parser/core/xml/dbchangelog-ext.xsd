@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+            xmlns="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+            elementFormDefault="qualified">
+
+    <xsd:simpleType name="ActionType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="enable"></xsd:enumeration>
+            <xsd:enumeration value="disable"></xsd:enumeration>
+            <xsd:enumeration value="show"></xsd:enumeration>
+            <xsd:enumeration value="show,disable"></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="OutType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="std"></xsd:enumeration>
+            <xsd:enumeration value="log"></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:element name="dbmsOutput">
+        <xsd:complexType>
+            <xsd:attribute name="action" type="ActionType" use="required"/>
+            <xsd:attribute name="bufferSize" type="xsd:integer" default="20000"/>
+            <xsd:attribute name="numLines" type="xsd:integer" default="1000"/>
+            <xsd:attribute name="outType" type="OutType" default="log"/>
+            <xsd:attribute name="logPrefix" type="xsd:string" default="dbms_output"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

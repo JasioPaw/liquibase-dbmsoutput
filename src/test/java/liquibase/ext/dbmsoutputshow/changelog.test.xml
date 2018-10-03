@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ora="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="test" id="DbmsOutputTest">
+        <ora:dbmsOutput action="enable" bufferSize="150000"/>
+
+        <sql splitStatements="false" stripComments="false" endDelimiter="\n/">
+            BEGIN
+            DBMS_OUTPUT.PUT_LINE('0. Hello From Oracle!');
+            END;
+        </sql>
+
+        <sql splitStatements="false" stripComments="false" endDelimiter="\n/">
+            BEGIN
+            DBMS_OUTPUT.PUT_LINE('1. Hello From Oracle!');
+            END;
+        </sql>
+
+        <sql splitStatements="false" stripComments="false" endDelimiter="\n/">
+            BEGIN
+            DBMS_OUTPUT.PUT_LINE('2. Hello From Oracle!');
+            END;
+        </sql>
+
+        <sql splitStatements="false" stripComments="false" endDelimiter="\n/">
+            BEGIN
+            DBMS_OUTPUT.PUT_LINE('3. Hello From Oracle!');
+            END;
+        </sql>
+
+        <sql splitStatements="false" stripComments="false" endDelimiter="\n/">
+            BEGIN
+            DBMS_OUTPUT.PUT_LINE('4. Hello From Oracle!');
+            END;
+        </sql>
+
+        <sql splitStatements="false" stripComments="false" endDelimiter="\n/">
+            BEGIN
+            DBMS_OUTPUT.PUT_LINE('5. Hello From Oracle!');
+            END;
+        </sql>
+        <ora:dbmsOutput action="show" numLines="10000" outType="std" logPrefix="dbms_output1"/>
+    </changeSet>
+
+</databaseChangeLog>
