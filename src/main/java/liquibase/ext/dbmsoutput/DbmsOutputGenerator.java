@@ -10,11 +10,7 @@ import liquibase.sqlgenerator.SqlGeneratorChain;
 import liquibase.sqlgenerator.core.AbstractSqlGenerator;
 
 import javax.xml.bind.ValidationException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.CallableStatement;
-import java.sql.Array;
-import java.sql.Types;
+import java.sql.*;
 
 public class DbmsOutputGenerator extends AbstractSqlGenerator<DbmsOutputStatement> {
 
@@ -103,8 +99,11 @@ public class DbmsOutputGenerator extends AbstractSqlGenerator<DbmsOutputStatemen
                     }
                 }
             } finally {
-                if (array != null)
-                    array.free();
+                if (array != null) {
+                    try {
+                        array.free();
+                    } catch (AbstractMethodError err) {}
+                }
 
                 connection.createStatement().
                         executeUpdate(Constants.DISABLE_DBMS_OUTPUT);
