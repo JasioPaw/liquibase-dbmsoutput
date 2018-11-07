@@ -58,13 +58,6 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations-java5</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-
         <!-- TO PHYSICALLY RUN TESTS, UNCOMMENT THIS DEPENDENCY -->
         <!-- AND MODIFY ./src/test/resources/tests.properties -->
         <!--<dependency>-->
