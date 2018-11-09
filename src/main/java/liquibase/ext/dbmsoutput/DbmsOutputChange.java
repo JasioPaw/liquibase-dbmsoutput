@@ -16,6 +16,7 @@ public class DbmsOutputChange extends AbstractChange {
     private Integer bufferSize;
     private String outType;
     private String logPrefix;
+    private String charsetName;
 
     @Override
     public String getConfirmationMessage() {
@@ -68,5 +69,14 @@ public class DbmsOutputChange extends AbstractChange {
 
     public void setLogPrefix(String logPrefix) {
         this.logPrefix = logPrefix;
+    }
+
+
+    public String getCharsetName() {
+        return charsetName == null ? Constants.DEFAULT_CHARSET_NAME: charsetName;
+    }
+
+    public void setCharsetName(String charsetName) {
+        this.charsetName = charsetName;
     }
 }

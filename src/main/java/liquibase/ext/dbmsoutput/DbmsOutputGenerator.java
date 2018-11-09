@@ -8,9 +8,13 @@ import liquibase.exception.ValidationErrors;
 import liquibase.sql.Sql;
 import liquibase.sqlgenerator.SqlGeneratorChain;
 import liquibase.sqlgenerator.core.AbstractSqlGenerator;
+import liquibase.util.StringUtils;
 
 import javax.xml.bind.ValidationException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.sql.*;
+import java.util.List;
 
 public class DbmsOutputGenerator extends AbstractSqlGenerator<DbmsOutputStatement> {
 
@@ -77,43 +81,39 @@ public class DbmsOutputGenerator extends AbstractSqlGenerator<DbmsOutputStatemen
 
     private Sql[] show(final DbmsOutputStatement statement,
                        final Database database) {
-
         final JdbcConnection connection = ((JdbcConnection) database.getConnection());
-        Array array = null;
 
         try {
             try {
                 final CallableStatement call = connection.prepareCall(Constants.GET_LINES_DBMS_OUTPUT);
-                call.setInt(2, statement.getNumLines());
-                call.registerOutParameter(1, Types.ARRAY, Constants.CALL_OUT_TYPE_NAME);
-                call.registerOutParameter(2, Types.INTEGER);
+                call.setInt(1, statement.getNumLines());
+                call.registerOutParameter(2, Types.BLOB);
                 call.execute();
 
-                array = call.getArray(1);
-                if (array != null) {
-                    String[] arrLines = (String[]) array.getArray();
-                    for (int i = 0; i < arrLines.length; i++) {
-                        if (arrLines[i] != null) {
-                            statement.getLogger().info(arrLines[i]);
-                        }
+                Blob blob = call.getBlob(2);
+                String[] arrLines = blobToLines(blob, statement.getCharsetName());
+                for (int i = 0; i < arrLines.length; i++) {
+                    if (arrLines[i] != null && arrLines[i].length() > 0) {
+                        statement.getLogger().info(arrLines[i]);
                     }
                 }
             } finally {
-                if (array != null) {
-                    try {
-                        array.free();
-                    } catch (AbstractMethodError err) {}
-                }
-
                 connection.createStatement().
                         executeUpdate(Constants.DISABLE_DBMS_OUTPUT);
             }
-        } catch (SQLException e) {
+        } catch (UnsupportedEncodingException e) {
             statement.getLogger().warning(Constants.DEFAULT_ERROR_MESSAGE, e);
         } catch (DatabaseException e) {
+            statement.getLogger().warning(Constants.DEFAULT_ERROR_MESSAGE, e);
+        } catch (SQLException e) {
             statement.getLogger().warning(Constants.DEFAULT_ERROR_MESSAGE, e);
         }
 
         return null;
+    }
+
+    private String[] blobToLines(final Blob blob, final String charsetName) throws SQLException, UnsupportedEncodingException {
+        String str = new String(blob.getBytes(1, (int) blob.length()), charsetName);
+        return str.split("\n");
     }
 }

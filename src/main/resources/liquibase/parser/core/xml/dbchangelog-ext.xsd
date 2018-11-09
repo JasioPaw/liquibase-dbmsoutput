@@ -26,6 +26,7 @@
             <xsd:attribute name="action" type="ActionType" use="required"/>
             <xsd:attribute name="bufferSize" type="xsd:integer" default="20000"/>
             <xsd:attribute name="numLines" type="xsd:integer" default="1000"/>
+            <xsd:attribute name="charsetName" type="xsd:string" default="UTF-8"/>
             <xsd:attribute name="outType" type="OutType" default="log"/>
             <xsd:attribute name="logPrefix" type="xsd:string" default="dbms_output"/>
         </xsd:complexType>

@@ -7,6 +7,7 @@ public class DbmsOutputStatement extends AbstractSqlStatement {
     private String action;
     private Integer numLines;
     private Integer bufferSize;
+    private String charsetName;
     private DbmsOutLogger logger;
 
     private DbmsOutputStatement() {
@@ -28,12 +29,17 @@ public class DbmsOutputStatement extends AbstractSqlStatement {
         return logger;
     }
 
+    public String getCharsetName() {
+        return charsetName;
+    }
+
     public static DbmsOutputStatement build(DbmsOutputChange change) {
         final DbmsOutputStatement statement = new DbmsOutputStatement();
         statement.action = change.getAction();
         statement.numLines = change.getNumLines();
         statement.bufferSize = change.getBufferSize();
         statement.logger = DbmsOutLogger.build(change.getOutType(), change.getLogPrefix());
+        statement.charsetName = change.getCharsetName();
         return statement;
     }
 }

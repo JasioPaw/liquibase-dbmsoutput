@@ -10,7 +10,7 @@ public class DbmsOutputDBTest extends BaseTestCase {
     public void setUp() throws Exception {
         changeLogFile = "liquibase/ext/dbmsoutputshow/changelog.test.xml";
         connectToDB();
-//        cleanDB();
+        cleanDB();
     }
 
     @Test

@@ -12,7 +12,7 @@
 
         <sql splitStatements="false" stripComments="false" endDelimiter="\n/">
             BEGIN
-            DBMS_OUTPUT.PUT_LINE('0. Hello From Oracle!');
+            DBMS_OUTPUT.PUT_LINE('0. a ą b c ć d e ę f g h i j k l ł m n ń o ó p r s ś t u w y z ź ż A Ą B C Ć D E Ę F G H I J K L Ł M N Ń O Ó P R S Ś T U W Y Z Ź Ż');
             END;
         </sql>
 
@@ -45,7 +45,7 @@
             DBMS_OUTPUT.PUT_LINE('5. Hello From Oracle!');
             END;
         </sql>
-        <ora:dbmsOutput action="show" numLines="10000" outType="std" logPrefix="dbms_output1"/>
+        <ora:dbmsOutput action="show" numLines="10000" outType="std" logPrefix="dbms_output1" charsetName="Cp1250"/>
     </changeSet>
 
 </databaseChangeLog>
